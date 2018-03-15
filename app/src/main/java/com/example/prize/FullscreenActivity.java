@@ -3,7 +3,6 @@ package com.example.prize;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -18,6 +17,10 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Random;
 
@@ -85,8 +88,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private AnimatorSet mSetRightOut;
     private AnimatorSet mSetLeftIn;
     private boolean mIsBackVisible = true;
-    private View mCardFrontLayout;
-    private View mCardBackLayout;
+    private View mCardFrontLayout, mCardBackLayout, mFronta, mFrontb, mBacka, mBackb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +124,7 @@ public class FullscreenActivity extends AppCompatActivity {
         Vmain2.getLayoutParams().width = (int) cardWidth;
         Vmain2.setScaleType(ImageView.ScaleType.FIT_XY);
         RelativeLayout.LayoutParams Vlayoutparams2 = (RelativeLayout.LayoutParams) Vmain2.getLayoutParams();
-        Vlayoutparams2.setMargins((int) (dpWidth / 12), 0, (int) (dpWidth / 12), (int) (dpHeight / 2));
+        Vlayoutparams2.setMargins((int) (dpWidth / 12), 0, (int) (dpWidth / 12), (int) (dpHeight / 6));
         Vmain2.setLayoutParams(Vlayoutparams2);
 
         final ImageView Vmain3 = findViewById(R.id.voidMain3);
@@ -146,7 +148,7 @@ public class FullscreenActivity extends AppCompatActivity {
         main2.getLayoutParams().height = (int) cardHeight;
         main2.getLayoutParams().width = (int) cardWidth;
         RelativeLayout.LayoutParams layoutparams2 = (RelativeLayout.LayoutParams) main2.getLayoutParams();
-        layoutparams2.setMargins((int) (dpWidth / 12), 0, (int) (dpWidth / 12), (int) (dpHeight / 2));
+        layoutparams2.setMargins((int) (dpWidth / 12), 0, (int) (dpWidth / 12), (int) (dpHeight / 6));
         main2.setLayoutParams(layoutparams2);
         Animation animSlide2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_bottom);
         main2.startAnimation(animSlide2);
@@ -160,7 +162,16 @@ public class FullscreenActivity extends AppCompatActivity {
         Animation animSlide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_right);
         main3.startAnimation(animSlide3);
 
-        final Animation goAway = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+//        final Animation goAway = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+
+        //TODO : create a fuction to set values on card as like this
+
+        TextView TextCard1 = main.findViewById(R.id.backText);
+        TextCard1.setText("Back 1");
+        TextView TextCard2 = main2.findViewById(R.id.backText);
+        TextCard2.setText("Back 2");
+        TextView TextCard3 = main3.findViewById(R.id.backText);
+        TextCard3.setText("Back 3");
 
         main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,18 +179,20 @@ public class FullscreenActivity extends AppCompatActivity {
                 Vmain.setVisibility(View.INVISIBLE);
                 Vmain2.setVisibility(View.INVISIBLE);
                 Vmain3.setVisibility(View.INVISIBLE);
-                main2.startAnimation(goAway);
-                main3.startAnimation(goAway);
-                main2.setVisibility(View.INVISIBLE);
-                main3.setVisibility(View.INVISIBLE);
+//                main2.startAnimation(goAway);
+//                main3.startAnimation(goAway);
+//                main2.setVisibility(View.INVISIBLE);
+//                main3.setVisibility(View.INVISIBLE);
                 main.setEnabled(false);
                 main2.setEnabled(false);
                 main3.setEnabled(false);
-                findViews(R.id.card_front_main, R.id.card_back_main);
+                findViews(1, R.id.card_front_main, R.id.card_back_main);
+                findViews(2, R.id.card_front_main2, R.id.card_back_main2);
+                findViews(3, R.id.card_front_main3, R.id.card_back_main3);
                 animate_to_center(main);
                 loadAnimations();
-                changeCameraDistance();
-                flipCard();
+                changeCameraDistance(1);
+                flipCard(mCardFrontLayout, mCardBackLayout);
             }
         });
 
@@ -189,18 +202,20 @@ public class FullscreenActivity extends AppCompatActivity {
                 Vmain.setVisibility(View.INVISIBLE);
                 Vmain2.setVisibility(View.INVISIBLE);
                 Vmain3.setVisibility(View.INVISIBLE);
-                main.startAnimation(goAway);
-                main3.startAnimation(goAway);
-                main.setVisibility(View.INVISIBLE);
-                main3.setVisibility(View.INVISIBLE);
+//                main.startAnimation(goAway);
+//                main3.startAnimation(goAway);
+//                main.setVisibility(View.INVISIBLE);
+//                main3.setVisibility(View.INVISIBLE);
                 main.setEnabled(false);
                 main2.setEnabled(false);
                 main3.setEnabled(false);
-                findViews(R.id.card_front_main2, R.id.card_back_main2);
+                findViews(1, R.id.card_front_main2, R.id.card_back_main2);
+                findViews(2, R.id.card_front_main, R.id.card_back_main);
+                findViews(3, R.id.card_front_main3, R.id.card_back_main3);
                 animate_to_center(main2);
                 loadAnimations();
-                changeCameraDistance();
-                flipCard();
+                changeCameraDistance(1);
+                flipCard(mCardFrontLayout, mCardBackLayout);
             }
         });
 
@@ -210,18 +225,20 @@ public class FullscreenActivity extends AppCompatActivity {
                 Vmain.setVisibility(View.INVISIBLE);
                 Vmain2.setVisibility(View.INVISIBLE);
                 Vmain3.setVisibility(View.INVISIBLE);
-                main.startAnimation(goAway);
-                main2.startAnimation(goAway);
-                main.setVisibility(View.INVISIBLE);
-                main2.setVisibility(View.INVISIBLE);
+//                main.startAnimation(goAway);
+//                main2.startAnimation(goAway);
+//                main.setVisibility(View.INVISIBLE);
+//                main2.setVisibility(View.INVISIBLE);
                 main.setEnabled(false);
                 main2.setEnabled(false);
                 main3.setEnabled(false);
-                findViews(R.id.card_front_main3, R.id.card_back_main3);
-                animate_to_center(main3);
+                findViews(1, R.id.card_front_main3, R.id.card_back_main3);
+                findViews(2, R.id.card_front_main, R.id.card_back_main);
+                findViews(3, R.id.card_front_main2, R.id.card_back_main2);
                 loadAnimations();
-                changeCameraDistance();
-                flipCard();
+                changeCameraDistance(1);
+                animate_to_center(main3);
+                flipCard(mCardFrontLayout, mCardBackLayout);
             }
         });
     }
@@ -246,12 +263,31 @@ public class FullscreenActivity extends AppCompatActivity {
         int yDest = dm.heightPixels / 2 - (splashImage.getMeasuredHeight() / 2)
                 - statusBarOffset;
 
-        TranslateAnimation anim = new TranslateAnimation(0, xDest
-                - originalPos[0], 0, yDest - originalPos[1]);
+        TranslateAnimation anim = new TranslateAnimation(0, xDest - originalPos[0], 0, yDest - originalPos[1]);
         anim.setDuration(500);
         set.addAnimation(anim);
         set.setFillAfter(true);
         set.setFillEnabled(true);
+
+        set.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                changeCameraDistance(2);
+                flipCard(mFronta, mBacka);
+                changeCameraDistance(3);
+                flipCard(mFrontb, mBackb);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         splashImage.startAnimation(set);
     }
@@ -275,11 +311,19 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    private void changeCameraDistance() {
+    private void changeCameraDistance(int i) {
         int distance = 5000;
         float scale = getResources().getDisplayMetrics().density * distance;
-        mCardFrontLayout.setCameraDistance(scale);
-        mCardBackLayout.setCameraDistance(scale);
+        if (i == 1) {
+            mCardFrontLayout.setCameraDistance(scale);
+            mCardBackLayout.setCameraDistance(scale);
+        } else if (i == 2) {
+            mFronta.setCameraDistance(scale);
+            mBacka.setCameraDistance(scale);
+        } else {
+            mFrontb.setCameraDistance(scale);
+            mBackb.setCameraDistance(scale);
+        }
     }
 
     private void loadAnimations() {
@@ -287,21 +331,29 @@ public class FullscreenActivity extends AppCompatActivity {
         mSetLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.in_animation);
     }
 
-    private void findViews(int card_front, int card_back) {
-        mCardBackLayout = findViewById(card_back);
-        mCardFrontLayout = findViewById(card_front);
+    private void findViews(int i, int card_front, int card_back) {
+        if (i == 1) {
+            mCardBackLayout = findViewById(card_back);
+            mCardFrontLayout = findViewById(card_front);
+        } else if (i == 2) {
+            mBacka = findViewById(card_back);
+            mFronta = findViewById(card_front);
+        } else {
+            mBackb = findViewById(card_back);
+            mFrontb = findViewById(card_front);
+        }
     }
 
-    public void flipCard() {
+    public void flipCard(View front, View back) {
         if (!mIsBackVisible) {
-            mSetRightOut.setTarget(mCardFrontLayout);
-            mSetLeftIn.setTarget(mCardBackLayout);
+            mSetRightOut.setTarget(front);
+            mSetLeftIn.setTarget(back);
             mSetRightOut.start();
             mSetLeftIn.start();
             mIsBackVisible = true;
         } else {
-            mSetRightOut.setTarget(mCardBackLayout);
-            mSetLeftIn.setTarget(mCardFrontLayout);
+            mSetRightOut.setTarget(back);
+            mSetLeftIn.setTarget(front);
             mSetRightOut.start();
             mSetLeftIn.start();
             mIsBackVisible = false;

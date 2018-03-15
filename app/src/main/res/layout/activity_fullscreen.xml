@@ -12,7 +12,7 @@
         android:layout_height="88.9dp"
         android:layout_alignTop="@+id/voidMain2"
         android:layout_toStartOf="@+id/voidMain2"
-        android:background="@drawable/card_boundary" />
+        android:background="@drawable/background" />
 
     <ImageView
         android:id="@+id/voidMain2"
@@ -20,7 +20,7 @@
         android:layout_height="88.9dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/card_boundary" />
+        android:background="@drawable/background" />
 
     <ImageView
         android:id="@+id/voidMain3"
@@ -28,7 +28,7 @@
         android:layout_height="88.9dp"
         android:layout_alignTop="@+id/voidMain2"
         android:layout_toEndOf="@+id/voidMain2"
-        android:background="@drawable/card_boundary" />
+        android:background="@drawable/background" />
 
     <FrameLayout
         android:id="@+id/card_back_main_box"
@@ -41,6 +41,7 @@
             android:id="@+id/card_front_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <include layout="@layout/card_front" />
 
         </FrameLayout>
@@ -48,6 +49,7 @@
             android:id="@+id/card_back_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <include layout="@layout/card_back" />
 
         </FrameLayout>
@@ -65,6 +67,7 @@
             android:id="@+id/card_front_main2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <include layout="@layout/card_front" />
 
         </FrameLayout>
@@ -73,6 +76,7 @@
             android:id="@+id/card_back_main2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <include layout="@layout/card_back" />
 
         </FrameLayout>
@@ -97,6 +101,7 @@
                 android:id="@+id/card_back_main3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <include layout="@layout/card_back" />
 
             </FrameLayout>
