@@ -25,7 +25,7 @@
             android:label="@string/title_activity_fullscreen"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".Main2Activity"></activity>
+
     </application>
 
 </manifest>
