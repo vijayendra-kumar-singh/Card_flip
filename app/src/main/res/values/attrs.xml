@@ -9,4 +9,16 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="flip_view">
+        <attr name="flipOnTouch" format="boolean"/>
+        <attr name="flipDuration" format="integer"/>
+        <attr name="flipType" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+        <attr name="flipEnabled" format="boolean"/>
+        <attr name="animFlipInId" format="reference"/>
+        <attr name="animFlipOutId" format="reference"/>
+    </declare-styleable>
+
 </resources>
