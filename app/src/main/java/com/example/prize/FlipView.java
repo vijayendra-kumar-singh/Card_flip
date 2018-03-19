@@ -252,18 +252,18 @@ public class FlipView extends FrameLayout {
         }
 
     }
-//
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        if (flipEnabled) {
-//            flipTheView(true);
-//        }
-//        return super.onTouchEvent(event);
-//    }
-//
-//    public boolean isFlipOnTouch() {
-//        return flipOnTouch;
-//    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (flipEnabled) {
+            flipTheView(true);
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public boolean isFlipOnTouch() {
+        return flipOnTouch;
+    }
 
     public void setFlipOnTouch(boolean flipOnTouch) {
         this.flipOnTouch = flipOnTouch;
