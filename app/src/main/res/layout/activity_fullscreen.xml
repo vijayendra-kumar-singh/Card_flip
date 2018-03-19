@@ -5,38 +5,13 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context="com.example.prize.FullscreenActivity">
-    <!--
-        <ImageView
-            android:id="@+id/voidMain"
-            android:layout_width="63.5dp"
-            android:layout_height="88.9dp"
-            android:layout_alignTop="@+id/voidMain2"
-            android:layout_toStartOf="@+id/voidMain2"
-            android:background="@drawable/background" />
 
-        <ImageView
-            android:id="@+id/voidMain2"
-            android:layout_width="63.5dp"
-            android:layout_height="88.9dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/background" />
-
-        <ImageView
-            android:id="@+id/voidMain3"
-            android:layout_width="63.5dp"
-            android:layout_height="88.9dp"
-            android:layout_alignTop="@+id/voidMain2"
-            android:layout_toEndOf="@+id/voidMain2"
-            android:background="@drawable/background" />
-    -->
     <com.example.prize.FlipView
         android:id="@+id/card2"
         android:layout_width="63.5dp"
         android:layout_height="88.9dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="animate">
+        android:layout_centerHorizontal="true">
 
         <include layout="@layout/card_front" />
 
@@ -48,8 +23,7 @@
         android:layout_width="63.5dp"
         android:layout_height="88.9dp"
         android:layout_alignTop="@+id/card2"
-        android:layout_toStartOf="@+id/card2"
-        android:onClick="animate">
+        android:layout_toStartOf="@+id/card2">
 
         <include layout="@layout/card_front" />
 
@@ -61,92 +35,11 @@
         android:layout_width="63.5dp"
         android:layout_height="88.9dp"
         android:layout_alignTop="@+id/card2"
-        android:layout_toEndOf="@+id/card2"
-        android:onClick="animate">
+        android:layout_toEndOf="@+id/card2">
 
         <include layout="@layout/card_front" />
 
         <include layout="@layout/card_back" />
     </com.example.prize.FlipView>
-    <!--
-        <FrameLayout
-            android:id="@+id/card_back_main_box"
-            android:layout_width="63.5dp"
-            android:layout_height="88.9dp"
-            android:layout_alignTop="@+id/card_back_main2_box"
-            android:layout_toStartOf="@+id/card_back_main2_box">
 
-            <FrameLayout
-                android:id="@+id/card_front_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <include layout="@layout/card_front" />
-
-            </FrameLayout>
-            <FrameLayout
-                android:id="@+id/card_back_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <include layout="@layout/card_back" />
-
-            </FrameLayout>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/card_back_main2_box"
-            android:layout_width="63.5dp"
-            android:layout_height="88.9dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
-
-            <FrameLayout
-                android:id="@+id/card_front_main2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <include layout="@layout/card_front" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/card_back_main2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <include layout="@layout/card_back" />
-
-            </FrameLayout>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/card_back_main3_box"
-            android:layout_width="63.5dp"
-            android:layout_height="88.9dp"
-            android:layout_alignTop="@+id/card_back_main2_box"
-            android:layout_toEndOf="@+id/card_back_main2_box">
-
-            <FrameLayout
-                android:id="@+id/card_front_main3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <include layout="@layout/card_front" />
-
-                <FrameLayout
-                    android:id="@+id/card_back_main3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <include layout="@layout/card_back" />
-
-                </FrameLayout>
-
-            </FrameLayout>
-
-        </FrameLayout>
-    -->
 </RelativeLayout>

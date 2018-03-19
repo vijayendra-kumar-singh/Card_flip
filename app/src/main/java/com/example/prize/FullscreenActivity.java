@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FullscreenActivity extends AppCompatActivity {
 
@@ -125,8 +126,48 @@ public class FullscreenActivity extends AppCompatActivity {
         Animation animSlide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_right);
         card3.startAnimation(animSlide3);
 
-//        final Animation goAway = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+        card1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (card1.isFlipEnabled()) {
+                    animate_to_center(card1);
+                    selectedCard = 1;
+                    card1.flipTheView(true);
+                } else {
+                    //TODO : form function to open dialogue
+                    Toast.makeText(FullscreenActivity.this, "open dialog", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
+
+        card2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (card2.isFlipEnabled()) {
+                    animate_to_center(card2);
+                    selectedCard = 2;
+                    card2.flipTheView(true);
+                } else {
+                    //TODO : form function to open dialogue
+                    Toast.makeText(FullscreenActivity.this, "open dialog", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        card3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (card3.isFlipEnabled()) {
+                    animate_to_center(card3);
+                    selectedCard = 3;
+                    card3.flipTheView(true);
+                } else {
+                    //TODO : form function to open dialogue
+                    Toast.makeText(FullscreenActivity.this, "open dialog", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         //TODO : create a fuction to set values on card as like this
 
         TextView TextCard1 = card1.findViewById(R.id.backText);
@@ -215,30 +256,30 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
-
-    public void animate(View v) {
-        switch (v.getId()) {
-            case R.id.card1:
-                animate_to_center(card1);
-                selectedCard = 1;
-                card1.setEnabled(false);
-                card2.setEnabled(false);
-                card3.setEnabled(false);
-                break;
-            case R.id.card2:
-                animate_to_center(card2);
-                selectedCard = 2;
-                card1.setEnabled(false);
-                card2.setEnabled(false);
-                card3.setEnabled(false);
-                break;
-            case R.id.card3:
-                animate_to_center(card3);
-                selectedCard = 3;
-                card1.setEnabled(false);
-                card2.setEnabled(false);
-                card3.setEnabled(false);
-                break;
-        }
-    }
+//
+//    public void animate(View v) {
+//        switch (v.getId()) {
+//            case R.id.card1:
+//                animate_to_center(card1);
+//                selectedCard = 1;
+////                card1.setEnabled(false);
+////                card2.setEnabled(false);
+////                card3.setEnabled(false);
+//                break;
+//            case R.id.card2:
+//                animate_to_center(card2);
+//                selectedCard = 2;
+////                card1.setEnabled(false);
+////                card2.setEnabled(false);
+////                card3.setEnabled(false);
+//                break;
+//            case R.id.card3:
+//                animate_to_center(card3);
+//                selectedCard = 3;
+////                card1.setEnabled(false);
+////                card2.setEnabled(false);
+////                card3.setEnabled(false);
+//                break;
+//        }
+//    }
 }
