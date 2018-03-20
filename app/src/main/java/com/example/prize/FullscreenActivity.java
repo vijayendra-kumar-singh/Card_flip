@@ -1,8 +1,10 @@
 package com.example.prize;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -12,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +80,7 @@ public class FullscreenActivity extends AppCompatActivity {
     float dpWidth, dpHeight;
     FlipView card1, card2, card3;
     int selectedCard;
+    RelativeLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,14 @@ public class FullscreenActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
+        ImageView base = findViewById(R.id.base);
+
+        base.getLayoutParams().height = (int) cardHeight;
+        base.getLayoutParams().width = (int) cardWidth;
+        RelativeLayout.LayoutParams layoutparamsBase = (RelativeLayout.LayoutParams) base.getLayoutParams();
+        layoutparamsBase.setMargins((int) (dpWidth / 12), 0, (int) (dpWidth / 12), (int) (dpHeight / 6));
+        base.setLayoutParams(layoutparamsBase);
 
         card1 = findViewById(R.id.card1);
         card1.getLayoutParams().height = (int) cardHeight;
@@ -130,6 +142,7 @@ public class FullscreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (card1.isFlipEnabled()) {
+                    card1.setFlipEnabled(false);
                     animate_to_center(card1);
                     selectedCard = 1;
                     card1.flipTheView(true);
@@ -145,6 +158,7 @@ public class FullscreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (card2.isFlipEnabled()) {
+                    card2.setFlipEnabled(false);
                     animate_to_center(card2);
                     selectedCard = 2;
                     card2.flipTheView(true);
@@ -159,6 +173,7 @@ public class FullscreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (card3.isFlipEnabled()) {
+                    card3.setFlipEnabled(false);
                     animate_to_center(card3);
                     selectedCard = 3;
                     card3.flipTheView(true);
@@ -178,14 +193,15 @@ public class FullscreenActivity extends AppCompatActivity {
         TextCard3.setText("Back 3");
     }
 
-    private void animate_to_center(FlipView card) {
+    private void animate_to_center(final FlipView card) {
 
         AnimationSet set = new AnimationSet(true);
+        final AnimationSet set2 = new AnimationSet(true);
 
         Animation zoom = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
         set.addAnimation(zoom);
 
-        RelativeLayout root = findViewById(R.id.fullscreen_content);
+        root = findViewById(R.id.fullscreen_content);
         DisplayMetrics dm = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(dm);
         int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();
@@ -193,10 +209,8 @@ public class FullscreenActivity extends AppCompatActivity {
         int originalPos[] = new int[2];
         card.getLocationOnScreen(originalPos);
 
-        int xDest = dm.widthPixels / 2;
-        xDest -= (card.getMeasuredWidth() / 2);
-        int yDest = dm.heightPixels / 2 - (card.getMeasuredHeight() / 2)
-                - statusBarOffset;
+        final int xDest = dm.widthPixels / 2 - (card.getMeasuredWidth() / 2);
+        final int yDest = dm.heightPixels / 2 - (card.getMeasuredHeight() / 2) - statusBarOffset;
 
         TranslateAnimation anim = new TranslateAnimation(0, xDest - originalPos[0], 0, yDest - originalPos[1]);
         anim.setDuration(1000);
@@ -210,8 +224,16 @@ public class FullscreenActivity extends AppCompatActivity {
 
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onAnimationEnd(Animation animation) {
+                TextView asd = card.findViewById(R.id.backText);
+                asd.setScaleX((float) (asd.getScaleX()*1.3));
+                asd.setScaleY((float) (asd.getScaleY()*1.3));
+                card.clearAnimation();
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(card1.getWidth() * 2, card1.getHeight() * 2);
+                lp.addRule(RelativeLayout.CENTER_IN_PARENT);
+                card.setLayoutParams(lp);
                 if (selectedCard == 1) {
                     card2.flipTheView(true);
                     card3.flipTheView(true);
@@ -237,6 +259,7 @@ public class FullscreenActivity extends AppCompatActivity {
         });
 
         card.startAnimation(set);
+
     }
 
     private void hide() {
@@ -256,30 +279,4 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
-//
-//    public void animate(View v) {
-//        switch (v.getId()) {
-//            case R.id.card1:
-//                animate_to_center(card1);
-//                selectedCard = 1;
-////                card1.setEnabled(false);
-////                card2.setEnabled(false);
-////                card3.setEnabled(false);
-//                break;
-//            case R.id.card2:
-//                animate_to_center(card2);
-//                selectedCard = 2;
-////                card1.setEnabled(false);
-////                card2.setEnabled(false);
-////                card3.setEnabled(false);
-//                break;
-//            case R.id.card3:
-//                animate_to_center(card3);
-//                selectedCard = 3;
-////                card1.setEnabled(false);
-////                card2.setEnabled(false);
-////                card3.setEnabled(false);
-//                break;
-//        }
-//    }
 }

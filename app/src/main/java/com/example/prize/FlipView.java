@@ -239,14 +239,11 @@ public class FlipView extends FrameLayout {
         if (!withAnimation) {
             mSetLeftIn.setDuration(0);
             mSetRightOut.setDuration(0);
-            boolean oldFlipEnabled = flipEnabled;
-            flipEnabled = true;
 
             flipTheView();
 
             mSetLeftIn.setDuration(flipDuration);
             mSetRightOut.setDuration(flipDuration);
-            flipEnabled = oldFlipEnabled;
         } else {
             flipTheView();
         }

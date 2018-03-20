@@ -6,6 +6,15 @@
     android:background="#ffffff"
     tools:context="com.example.prize.FullscreenActivity">
 
+    <ImageView
+        android:id="@+id/base"
+        android:layout_width="63.5dp"
+        android:layout_height="88.9dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+    </ImageView>
+
     <com.example.prize.FlipView
         android:id="@+id/card2"
         android:layout_width="63.5dp"
@@ -22,8 +31,8 @@
         android:id="@+id/card1"
         android:layout_width="63.5dp"
         android:layout_height="88.9dp"
-        android:layout_alignTop="@+id/card2"
-        android:layout_toStartOf="@+id/card2">
+        android:layout_alignTop="@+id/base"
+        android:layout_toStartOf="@+id/base">
 
         <include layout="@layout/card_front" />
 
@@ -34,8 +43,8 @@
         android:id="@+id/card3"
         android:layout_width="63.5dp"
         android:layout_height="88.9dp"
-        android:layout_alignTop="@+id/card2"
-        android:layout_toEndOf="@+id/card2">
+        android:layout_alignTop="@+id/base"
+        android:layout_toEndOf="@+id/base">
 
         <include layout="@layout/card_front" />
 

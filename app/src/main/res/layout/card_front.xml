@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/front"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tint="#3F454C"
@@ -16,6 +17,7 @@
         android:layout_height="match_parent"
         android:text="Back"
         android:textColor="#ffffff"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         style="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
         android:gravity="center"/>
 

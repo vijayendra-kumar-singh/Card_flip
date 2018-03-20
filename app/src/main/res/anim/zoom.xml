@@ -7,5 +7,5 @@
         android:pivotX="50%"
         android:pivotY="75%"
         android:toXScale="2.0"
-        android:toYScale="2.0" />
+        android:toYScale="2.0"/>
 </set>
